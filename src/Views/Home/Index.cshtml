@@ -40,7 +40,7 @@
         $(document).on("click", ".log", function() {
             var id = $(this).closest("tr").data("id");
             console.log(id);
-            $.get("/Home/Log", result => {
+            $.get("/Home/Log", { id: id }, result => {
                 console.log(result);
                 for(var i = 0; i < result.length; i++)
                 {

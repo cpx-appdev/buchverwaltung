@@ -24,11 +24,10 @@ namespace WebApplication.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Log()
+        public IActionResult Log(Guid id)
         {
-            var log = new List<BuchLog>();
-            log.Add(new BuchLog { Ereignis = "Angelegt", Datum = DateTime.Now, Daten = "Iwas" });
-            log.Add(new BuchLog { Ereignis = "Verliehen", Datum = DateTime.Now.AddDays(1), Daten = "Daniel" });
+            var tuple = interactor.BuchlogAnzeigen(id);
+            var log = tuple.Item2;
             return Json(log);
         }
 
