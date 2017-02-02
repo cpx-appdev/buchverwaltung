@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Shouldly;
 using Xunit;
 
 namespace WebApplication.EventStorage
 {
-    public class EventStore
+    public class EventStore : IEventStorage
     {
         private readonly List<BuchEvent> _events = new List<BuchEvent>();
 
@@ -16,6 +18,11 @@ namespace WebApplication.EventStorage
         public BuchEvent[] LadeAlleEvents()
         {
             return _events.ToArray();
+        }
+
+        public BuchEvent[] LadeEventsByBuchId(Guid buchId)
+        {
+            return _events.Where(x => x.BuchId == buchId).ToArray();
         }
     }
 
@@ -50,6 +57,24 @@ namespace WebApplication.EventStorage
             // Assert
             events.ShouldNotBeNull();
             events.Length.ShouldBe(2);
+        }
+
+        [Fact]
+        public void Sollte_Event_bei_BuchId_zurückgeben()
+        {
+            // Arrange
+            var eventStore = new EventStore();
+            var buchId = Guid.NewGuid();
+            var @event = new AngelegtEvent {BuchId = buchId};
+            eventStore.EventHinzufügen(@event);
+
+            // Act
+            var events = eventStore.LadeEventsByBuchId(buchId);
+
+            // Assert
+            events.ShouldNotBeNull();
+            events.Length.ShouldBe(1);
+            events[0].ShouldBe(@event);
         }
     }
 }

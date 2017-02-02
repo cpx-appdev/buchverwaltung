@@ -16,7 +16,7 @@ public class ErzeugeBuchLogTest
         buchEvents.Add(new AngelegtEvent() {
             Titel = "VB6",
             Datum = DateTime.Parse("2017-02-01"),
-            EventId =  new Guid("7c9e6679-7425-40de-944b-e07fc1f90ae7")  } );
+            BuchId =  new Guid("7c9e6679-7425-40de-944b-e07fc1f90ae7")  } );
 
         // Act
         var result = buchLogHandler.Handle(buchEvents.ToArray());

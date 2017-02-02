@@ -2,7 +2,7 @@ using System;
 
 public abstract class BuchEvent
 {
-    public Guid EventId { get; set; }
+    public Guid BuchId { get; set; }
     public DateTime Datum { get; set; }
 }
 public class AngelegtEvent : BuchEvent
@@ -13,7 +13,7 @@ public class AngelegtEvent : BuchEvent
     {
         return new AngelegtEvent 
         { 
-            EventId = Guid.NewGuid(), 
+            BuchId = Guid.NewGuid(), 
             Datum = DateTime.Now,
             Titel = titel
         };

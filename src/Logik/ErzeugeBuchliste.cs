@@ -14,7 +14,7 @@ public class ErzeugeBuchliste : IErzeugeBuchliste
                 continue;
             result.Add(new Buch
             {
-                Id = buchEvent.EventId
+                Id = buchEvent.BuchId
             });
         }
         return result.ToArray();
