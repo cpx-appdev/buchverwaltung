@@ -1,22 +1,27 @@
+using Shouldly;
 using System;
+using System.Collections.Generic;
+using Xunit;
 
 public class ErzeugeBuchlisteTests
 {
- 
+    [Fact]
     public void ErzeugeBuchliste_aus_Null_Liste()
     {
-        //var result = Handle(null);
+        var result = new ErzeugeBuchliste().Handle(null);
 
-        //result.Length == 0;
+        result.Length.ShouldBe(0);
     }
 
+    [Fact]
     public void ErzeugeBuchliste_aus_leerer_Liste()
     {
-        //var result = Handle(new AngelegtEvent[0]);
+        var result = new ErzeugeBuchliste().Handle(new AngelegtEvent[0]);
 
-        //result.Length == 0;
+        result.Length.ShouldBe(0);
     }
 
+    [Fact]
     public void ErzeugeBuchliste_aus_normaler_Liste()
     {
         var events = new[]
@@ -25,8 +30,8 @@ public class ErzeugeBuchlisteTests
             AngelegtEvent.Create("Bar"),
         };
 
-        //var result = Handle(events);
+        var result = new ErzeugeBuchliste().Handle(events);
 
-        //result.Length == 2;
+        result.Length.ShouldBe(2);
     }
 }
