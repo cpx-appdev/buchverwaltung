@@ -8,4 +8,14 @@ public abstract class BuchEvent
 public class AngelegtEvent : BuchEvent
 {
     public string Titel { get; set; }
+
+    public static AngelegtEvent Create(string titel)
+    {
+        return new AngelegtEvent 
+        { 
+            EventId = Guid.NewGuid, 
+            Datum = Datetime.Now,
+            Titel = titel
+        };
+    }
 }
