@@ -1,31 +1,44 @@
 @model List<BuchViewModel>
-    
-<h1>Bücher</h1>
 
-<table>
-    <tr>
-        <th>Titel</th>
-        <th>Verliehen an</th>
-        <th>am</th>
-        <th></th>
-    </tr>
-    @foreach(var buch in Model)
-    {
+    <h1>Bücher</h1>
+
+    <table>
         <tr>
-            <td>@buch.Titel</td>
-            <td>@buch.VerliehenAn</td>
-            <td>@buch.VerliehenAm</td>
-            <td>
-                <button>Log</button>
-            </td>
+            <th>Titel</th>
+            <th>Verliehen an</th>
+            <th>am</th>
+            <th></th>
         </tr>
-    }
-</table>
-<button>Neu</button>
-
-@section scripts
+        @foreach(var buch in Model) 
+        {
+            <tr data-id="@buch.Id">
+                <td>@buch.Titel</td>
+                <td>@buch.VerliehenAn</td>
+                <td>@buch.VerliehenAm</td>
+                <td>
+                    <button class="log">Log</button>
+                </td>
+            </tr>
+        }
+    </table>
+    <button id="new">Neu</button>
+    
+@section scripts 
 {
     <script>
-        
+        $(document).on("click", "#new", () => {
+            var titel = prompt("Titel eingeben:");
+            $.post("/Home/New", { titel: titel }, () => {
+                window.location.reload();
+            });
+        });
+
+        $(document).on("click", ".log", function() {
+            var id = $(this).closest("tr").data("id");
+            console.log(id);
+            $.get("/Home/Log", result => {
+                console.log(result);
+            });
+        });
     </script>
 }
