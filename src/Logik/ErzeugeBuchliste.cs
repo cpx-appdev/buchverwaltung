@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+
 public class ErzeugeBuchliste : IErzeugeBuchliste
 {
     public Buch[] Handle(BuchEvent[] events)
@@ -10,12 +10,16 @@ public class ErzeugeBuchliste : IErzeugeBuchliste
         var result = new List<Buch>();
         foreach (var buchEvent in events)
         {
-            if ((AngelegtEvent)buchEvent == null)
-                continue;
-            result.Add(new Buch
+            var angelegtEvent = buchEvent as AngelegtEvent;
+
+            if (angelegtEvent != null)
             {
-                Id = buchEvent.BuchId
-            });
+                result.Add(new Buch
+                {
+                    Titel = angelegtEvent.Titel,
+                    Id = angelegtEvent.BuchId
+                });
+            }
         }
         return result.ToArray();
     }

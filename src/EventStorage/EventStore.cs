@@ -8,7 +8,7 @@ namespace WebApplication.EventStorage
 {
     public class EventStore : IEventStorage
     {
-        private readonly List<BuchEvent> _events = new List<BuchEvent>();
+        private static readonly List<BuchEvent> _events = new List<BuchEvent>();
 
         public void EventHinzufügen(BuchEvent @event)
         {
