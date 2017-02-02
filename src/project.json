@@ -40,9 +40,10 @@
       "type": "build"
     },
     "xunit": "2.1.0",
-    "Shouldly": "2.8.2"
+    "Shouldly": "2.8.2",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
-
+  "testRunner": "xunit",
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview2-final",
