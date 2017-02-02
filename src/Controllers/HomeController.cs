@@ -1,22 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.EventStorage;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        BuchverwaltungInteraktor interactor;
+
         public HomeController()
         {
+            interactor = new BuchverwaltungInteraktor(new EventStore(),
+             new ErzeugeBuchliste(),
+             new ErzeugeAngelegtEvent(),
+              new ErzeugeBuchLog());
         }
         public IActionResult Index()
         {
-            var buecher = new List<Buch>();
-            buecher.Add(new Buch { Id = Guid.NewGuid(), Titel = "Buch 1", VerliehenAm = DateTime.Now.AddDays(-2), VerliehenAn = "Markus" });
-            buecher.Add(new Buch { Id = Guid.NewGuid(), Titel = "Buch 2", VerliehenAm = DateTime.Now.AddDays(-7), VerliehenAn = "Jens" });
-
+            var buecher = interactor.Start();
             var viewModel = buecher.Select(x => new BuchViewModel(x)).ToList();
             return View(viewModel);
         }
@@ -33,6 +36,7 @@ namespace WebApplication.Controllers
         public IActionResult New(string titel)
         {
             //new
+            interactor.BuchAnlegen(titel);
             return RedirectToAction("Index");
         }
 
