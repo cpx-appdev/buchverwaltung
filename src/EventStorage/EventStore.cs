@@ -1,18 +1,21 @@
-﻿using Shouldly;
+﻿using System.Collections.Generic;
+using Shouldly;
 using Xunit;
 
 namespace WebApplication.EventStorage
 {
     public class EventStore
     {
-        public void EventHinzufügen(AngelegtEvent @event)
+        private readonly List<BuchEvent> _events = new List<BuchEvent>();
+
+        public void EventHinzufügen(BuchEvent @event)
         {
-            throw new System.NotImplementedException();
+            _events.Add(@event);
         }
 
         public BuchEvent[] LadeAlleEvents()
         {
-            throw new System.NotImplementedException();
+            return _events.ToArray();
         }
     }
 
@@ -32,6 +35,7 @@ namespace WebApplication.EventStorage
             eventStore.LadeAlleEvents().ShouldContain(@event);
         }
 
+        [Fact]
         public void Sollte_alle_Events_zurückgeben()
         {
             // Arrange
