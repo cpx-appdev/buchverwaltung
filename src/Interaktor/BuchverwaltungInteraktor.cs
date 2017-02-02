@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 
 /// <summary>
 /// Summary description for BuchverwaltungInteraktor
 /// </summary>
 public class BuchverwaltungInteraktor
 {
-    public BuchverwaltungInteraktor()
-    {
+    private IEventStorage _eventstorage;
+    private IErzeugeBuchliste _erzeugeBuchliste;
 
+    public BuchverwaltungInteraktor(
+        IEventStorage eventStorage,
+        IErzeugeBuchliste erzeugeBuchliste)
+    {
+        _eventstorage = eventStorage;
+        _erzeugeBuchliste = erzeugeBuchliste;
     }
 
-    public IEnummerable<Buch> Start()
+    public IList<Buch> Start()
     {
-        return Enummerable.Empty<Buch>();
+        var buchEvents = _eventstorage.LadeAlleEvents();
+        return _erzeugeBuchliste.Handle(buchEvents);
     }
 }

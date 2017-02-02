@@ -1,22 +1,22 @@
 using System;
-interface IEventStorage 
+public interface IEventStorage 
 {
     BuchEvent[] LadeAlleEvents();
     void EventHinzufügen(BuchEvent @event);
     BuchEvent[] LadeEventsByBuchId(Guid buchId);
 }
 
-interface IErzeugeBuchliste
+public interface IErzeugeBuchliste
 {
     Buch[] Handle(BuchEvent[] events);
 }
 
-interface IErzeugeAngelegtEvent
+public interface IErzeugeAngelegtEvent
 {
     AngelegtEvent Handle(string titel);
 }
 
-interface IErzeugeBuchLog
+public interface IErzeugeBuchLog
 {
     Tuple<string, BuchLog[]> Handle(BuchEvent[] events);
 }
