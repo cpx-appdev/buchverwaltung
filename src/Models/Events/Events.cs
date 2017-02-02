@@ -13,8 +13,8 @@ public class AngelegtEvent : BuchEvent
     {
         return new AngelegtEvent 
         { 
-            EventId = Guid.NewGuid, 
-            Datum = Datetime.Now,
+            EventId = Guid.NewGuid(), 
+            Datum = DateTime.Now,
             Titel = titel
         };
     }
