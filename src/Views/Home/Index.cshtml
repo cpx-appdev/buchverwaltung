@@ -1,1 +1,31 @@
-<h1>Home</h1>
+@model List<BuchViewModel>
+    
+<h1>Bücher</h1>
+
+<table>
+    <tr>
+        <th>Titel</th>
+        <th>Verliehen an</th>
+        <th>am</th>
+        <th></th>
+    </tr>
+    @foreach(var buch in Model)
+    {
+        <tr>
+            <td>@buch.Titel</td>
+            <td>@buch.VerliehenAn</td>
+            <td>@buch.VerliehenAm</td>
+            <td>
+                <button>Log</button>
+            </td>
+        </tr>
+    }
+</table>
+<button>Neu</button>
+
+@section scripts
+{
+    <script>
+        
+    </script>
+}

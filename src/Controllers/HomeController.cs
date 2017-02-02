@@ -10,21 +10,12 @@ namespace WebApplication.Controllers
     {
         public IActionResult Index()
         {
-            return View();
-        }
+            var buecher = new List<Buch>();
+            buecher.Add(new Buch { Titel = "Buch 1", VerliehenAm = DateTime.Now.AddDays(-2), VerliehenAn = "Markus" });
+            buecher.Add(new Buch { Titel = "Buch 2", VerliehenAm = DateTime.Now.AddDays(-7), VerliehenAn = "Jens" });
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var viewModel = buecher.Select(x => new BuchViewModel(x)).ToList();
+            return View(viewModel);
         }
 
         public IActionResult Error()
