@@ -22,6 +22,10 @@
         }
     </table>
     <button id="new">Neu</button>
+
+    <table id="log">
+
+    </table>
     
 @section scripts 
 {
@@ -38,6 +42,14 @@
             console.log(id);
             $.get("/Home/Log", result => {
                 console.log(result);
+                for(var i = 0; i < result.length; i++)
+                {
+                    var tr = $("<tr>");
+                    tr.append($("<td>").text(result[i].ereignis));
+                    tr.append($("<td>").text(result[i].datum));
+                    tr.append($("<td>").text(result[i].daten));
+                    $("#log").append(tr);
+                }                
             });
         });
     </script>
