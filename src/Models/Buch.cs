@@ -1,5 +1,5 @@
 using System;
-class Buch
+public class Buch
 {
     public Guid Id { get; set; }
     public string Titel { get; set; }
@@ -7,7 +7,7 @@ class Buch
     public DateTime VerliehenAm { get; set; }
 }
 
-class BuchLog
+public class BuchLog
 {
     public string Ereignis { get; set; }
     public DateTime Datum { get; set; }
