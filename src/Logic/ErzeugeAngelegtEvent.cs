@@ -1,13 +1,8 @@
 using System;
-class ErzeugeAngelegtEvent : IErzeugeAngelegtEvent
+public class ErzeugeAngelegtEvent : IErzeugeAngelegtEvent
 {
-    AngelegtEvent IErzeugeAngelegtEvent.Handle(string titel)
+    public AngelegtEvent Handle(string titel)
     {
-        return new AngelegtEvent()
-        {
-            Titel = titel,
-            Datum = DateTime.Now,
-            EventId = Guid.NewGuid()
-        };
-}
+        return AngelegtEvent.Create(titel);
+    }
 }
