@@ -22,7 +22,6 @@ class ErzeugeBuchLog : IErzeugeBuchLog
     private BuchLog Map(BuchEvent @event)
     {
         // use DI later here, MappingLogic for poor coders...
-
         switch (@event.GetType().Name)
         {
             case nameof(AngelegtEvent):
